@@ -117,7 +117,7 @@ Defaults:
                     !string.IsNullOrWhiteSpace(this.X509SecondaryCertPath) &&
                     !string.IsNullOrWhiteSpace(this.X509SecondaryKeyPath))
                 {
-                    // use thumbprint auth and perform test for both primary and secondary certificates
+                    Console.WriteLine("Use thumbprint auth and perform test for both primary and secondary certificates.");
                     var thumbprintCerts = new List<string> { this.X509PrimaryCertPath, this.X509SecondaryCertPath };
                     builder.SetX509ThumbprintAuthProperties(
                         this.X509PrimaryCertPath,
@@ -140,7 +140,7 @@ Defaults:
                 else if (!string.IsNullOrWhiteSpace(this.X509CACertPath) &&
                          !string.IsNullOrWhiteSpace(this.X509CAKeyPath))
                 {
-                    // use X.509 CA auth and perform test using CA chained certificates
+                    Console.WriteLine("Use X.509 CA auth and perform test using CA chained certificates.");
                     builder.SetX509CAAuthProperties(
                         this.X509CACertPath,
                         this.X509CAKeyPath);
@@ -149,8 +149,7 @@ Defaults:
                 }
                 else
                 {
-                    builder.Build();
-                    // non certificate flow use SAS tokens
+                    Console.WriteLine("Non certificate flow use SAS tokens.");
                     LeafDevice testSas = builder.Build();
                     await testSas.RunAsync();
                 }
