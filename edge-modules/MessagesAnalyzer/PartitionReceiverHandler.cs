@@ -73,6 +73,7 @@ namespace MessagesAnalyzer
             {
                 if (DateTime.TryParse(enqueued.ToString(), out enqueuedtime))
                 {
+                    Log.LogDebug($"EnqueuedTime value:{enqueued},{enqueuedtime:r}({enqueuedtime.Kind.ToString()})");
                     enqueuedtime = DateTime.SpecifyKind(enqueuedtime, DateTimeKind.Utc);
                 }
                 else
